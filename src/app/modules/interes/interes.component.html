@@ -1,0 +1,89 @@
+<hr />
+<div class="card justify-content-center" style="margin: 1%">
+    <div class="p-col-12">
+        <p-card [header]="checked ? 'Interés Compuesto' : 'Interés Simple'">
+            <p-inputSwitch [(ngModel)]="checked" pTooltip="Interés compuesto" (onChange)="onSwitchChange()"></p-inputSwitch>
+            <br /><br />
+            <div class="text-align: center;">
+                <form>
+                    <div class="card flex flex-wrap gap-3 p-fluid">
+                        <div class="flex-auto">
+                            <label style="font-weight: bold" for="minmaxfraction">Valor de la deuda</label>
+                            <p-inputNumber id="deuda" name="deuda" [(ngModel)]="deuda" mode="currency" currency="COP"
+                                [showButtons]="true" inputId="minmaxfraction" [minFractionDigits]="0"
+                                [maxFractionDigits]="3" [min]="0" (focusout)="toucheddeuda = true">
+                            </p-inputNumber>
+                            <small id="deuda" *ngIf="(deuda === 0 || deuda === null) && toucheddeuda" class="p-error">El
+                                valor de la deuda es requerido</small>
+                        </div>
+                        <div class="flex-auto">
+                            <label style="font-weight: bold" for="minmaxfraction">Tasa de interés</label>
+                            <p-inputNumber id="tasaInteres" mode="decimal" name="tasaInteres" inputId="percent"
+                                prefix="%" [(ngModel)]="tasaInteres" inputId="withoutgrouping" [showButtons]="true"
+                                [min]="0" [max]="100" [maxFractionDigits]="2" (focusout)="touchedtasaInteres = true">
+                            </p-inputNumber>
+                            <small id="tasaInteres"
+                                *ngIf="(tasaInteres === 0 || tasaInteres === null) && touchedtasaInteres"
+                                class="p-error">La tasa de interés es requerida</small>
+                        </div>
+                        <div class="flex-auto" *ngIf="checked">
+                            <label style="font-weight: bold" for="minmaxfraction">Tiempo en meses</label>
+                            <p-inputNumber [(ngModel)]="tiempo" name="tiempo" inputId="withoutgrouping"
+                                [showButtons]="true" [useGrouping]="false" mode="decimal" [min]="1" [max]="1000"
+                                [maxFractionDigits]="2" (focusout)="touchedtiempo = true">
+                            </p-inputNumber>
+                            <small id="tasaInteres" *ngIf="tiempo === null && touchedtiempo" class="p-error">El tiempo
+                                es requerido</small>
+                        </div>
+                        <div class="flex-auto" *ngIf="!checked">
+                            <label style="font-weight: bold" for="minmaxfraction">Tipo de interés</label>
+                            <div class="flex flex-wrap gap-3">
+                                <div class="flex align-items-center">
+                                    <p-radioButton name="tipoInteresSimple" value="Comercial" [(ngModel)]="tipoInteresSimple"
+                                        inputId="tipoInteresSimple1"></p-radioButton>
+                                    <label for="Comercial" class="ml-2">Comercial</label>
+                                </div>
+
+                                <div class="flex align-items-center">
+                                    <p-radioButton name="tipoInteresSimple" value="Bancario" [(ngModel)]="tipoInteresSimple"
+                                        inputId="tipoInteresSimple2"></p-radioButton>
+                                    <label for="Bancario" class="ml-2">Bancario</label>
+                                </div>
+
+                                <div class="flex align-items-center">
+                                    <p-radioButton name="tipoInteresSimple" value="Racional" [(ngModel)]="tipoInteresSimple"
+                                        inputId="tipoInteresSimple3"></p-radioButton>
+                                    <label for="Racional" class="ml-2">Racional</label>
+                                </div>
+
+                                <div class="flex align-items-center">
+                                    <p-radioButton name="tipoInteresSimple" value="Ideal" [(ngModel)]="tipoInteresSimple"
+                                        inputId="tipoInteresSimple4"></p-radioButton>
+                                    <label for="Ideal" class="ml-2">Ideal</label>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div style="text-align: right; margin-top: 15px">
+                        <p-button styleClass="p-button-outlined p-button-secondary" icon="pi pi-calculator"
+                            [disabled]="deuda === 0 || deuda === null || tasaInteres === 0 || tasaInteres === null || tiempo === null || tasaInteres>100"
+                            [label]="
+                checked
+                  ? 'Calcular Interés Compuesto'
+                  : 'Calcular Interés Simple'
+              " (click)="calculate()"></p-button>
+                    </div>
+                </form>
+
+                <ng-template [ngIf]="activarResultado">
+                    <span class="font-medium ml-2" style="font-family: monospace; font-size:19px;color: rgb(36, 36, 36);font-weight: bold">{{
+                        !checked ? 'El valor del interés simple es: ' : 'El valor del interés compuesto es' }} {{
+                        !checked ? valorInteresSimple : valorInteresCompuesto }}</span>
+                        <br/>
+                    <span class="font-medium ml-2" style="font-family: monospace; font-size:19px;color: rgb(36, 36, 36);font-weight: bold">El valor total de la deuda es: {{
+                        !checked ? valorTotalInteresSimple : valorTotalInteresCompuesto }}</span>
+                </ng-template>
+            </div>
+        </p-card>
+    </div>
+</div>

@@ -1,0 +1,59 @@
+<div class="card justify-content-center">
+    <p-card>
+        <p-menubar [model]="items">
+          <ng-template pTemplate="start">
+            <img
+              src="https://thumbs.dreamstime.com/b/vector-de-plantilla-logotipo-profesional-business-finance-dise%C3%B1o-del-vectorial-analysis-arrow-badge-bank-brand-broker-chart-161327460.jpg"
+              [style]="{ display: 'block', margin: 'auto', borderRadius: '50%' }"
+              width="60"
+              height="60"
+              alt="Logo"
+              class="mr-2"
+            />
+          </ng-template>
+          <ng-template pTemplate="end">
+            <img
+            [style]="{ display: 'block', margin: 'auto' }"
+            width="60"
+            height="60"
+            alt="User"
+            src="https://upload.wikimedia.org/wikipedia/commons/thumb/2/2e/Escudo_UD.svg/248px-Escudo_UD.svg.png"
+          />
+            
+          </ng-template>
+        </p-menubar>
+      </p-card>
+</div>
+
+<div class="layout-footer">
+    <span class="font-medium ml-2" style="font-family: monospace; font-size:large;color: gray;">Universidad Distrital Francisco José de Caldas,Ingeniería económica-2023</span>
+</div>
+
+
+<ng-template [ngIf]="validateActiveControl('interes')">
+    <app-interes></app-interes>
+</ng-template>
+
+<ng-template [ngIf]="validateActiveControl('conversionTasas')">
+    <app-conversion></app-conversion>
+</ng-template>
+
+<ng-template [ngIf]="validateActiveControl('equivalenciaTasas')">
+    <app-equivalencia-tasas></app-equivalencia-tasas>
+</ng-template>
+
+<ng-template [ngIf]="validateActiveControl('descuento')">
+    <app-descuento></app-descuento>
+</ng-template>
+
+<ng-template [ngIf]="validateActiveControl('anualidades')">
+    <app-anualidad></app-anualidad>
+</ng-template>
+
+<ng-template [ngIf]="validateActiveControl('amortizacion')">
+    <app-amortizacion></app-amortizacion>
+</ng-template>
+
+<ng-template [ngIf]="validateActiveControl('capitalizacion')">
+    <app-capitalizacion></app-capitalizacion>
+</ng-template>
