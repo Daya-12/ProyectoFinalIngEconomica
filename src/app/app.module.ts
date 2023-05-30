@@ -24,6 +24,7 @@ import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { MenuModule } from 'primeng/menu';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { RadioButtonModule } from 'primeng/radiobutton';
+import { MultiSelectModule } from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { RadioButtonModule } from 'primeng/radiobutton';
     InputTextareaModule,
     MenuModule,
     InputSwitchModule,
-    RadioButtonModule
+    RadioButtonModule,
+    MultiSelectModule
   ],
   exports: [
     ReactiveFormsModule,

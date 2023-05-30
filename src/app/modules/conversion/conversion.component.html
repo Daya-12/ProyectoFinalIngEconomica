@@ -1,1 +1,21 @@
-<p>conversion works!</p>
+<hr />
+<div class="card justify-content-center" style="margin: 1%">
+    <div class="p-col-12">
+        <p-card [header]="titulo">
+            <div class="card flex flex-wrap gap-3 p-fluid">
+                <div class="flex-auto">
+                    <p-inputSwitch [(ngModel)]="checkedDeiaj" pTooltip="Convertir de tasa efectiva a tasa nominal"
+                        (onChange)="onSwitchChange('checkedDeiaj')"></p-inputSwitch>
+                </div>
+                <div class="flex-auto">
+                    <p-inputSwitch [(ngModel)]="checkedDejai" pTooltip="Convertir de tasa nominal a tasa efectiva"
+                        (onChange)="onSwitchChange('checkedDejai')"></p-inputSwitch>
+                </div>
+                <div class="flex-auto">
+                    <p-inputSwitch [(ngModel)]="checkedDeiaiant" pTooltip="Convertir de tasa efectiva a tasa efectiva anticipada"
+                        (onChange)="onSwitchChange('checkedDeiaiant')"></p-inputSwitch>
+                </div>
+            </div>
+        </p-card>
+    </div>
+</div>

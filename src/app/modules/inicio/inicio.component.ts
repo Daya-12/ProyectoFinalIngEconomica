@@ -27,7 +27,7 @@ export class InicioComponent implements OnInit{
             items: [
               {
                   label: 'Conversión',
-                  icon: 'pi pi-calendar',
+                  icon: 'pi pi-money-bill',
                   command: () => {
                     this.controlItemsMenu('conversionTasas');
                   }
