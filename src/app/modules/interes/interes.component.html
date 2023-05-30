@@ -23,7 +23,7 @@
                                 [min]="0" [max]="100" [maxFractionDigits]="2" (focusout)="touchedtasaInteres = true">
                             </p-inputNumber>
                             <small id="tasaInteres"
-                                *ngIf="(tasaInteres === 0 || tasaInteres === null) && touchedtasaInteres"
+                                *ngIf="(tasaInteres === null) && touchedtasaInteres"
                                 class="p-error">La tasa de interés es requerida</small>
                         </div>
                         <div class="flex-auto" *ngIf="checked">
@@ -66,7 +66,7 @@
                     </div>
                     <div style="text-align: right; margin-top: 15px">
                         <p-button styleClass="p-button-outlined p-button-secondary" icon="pi pi-calculator"
-                            [disabled]="deuda === 0 || deuda === null || tasaInteres === 0 || tasaInteres === null || tiempo === null || tasaInteres>100"
+                            [disabled]="deuda === 0 || deuda === null || tasaInteres === null || tiempo === null || tasaInteres>100"
                             [label]="
                 checked
                   ? 'Calcular Interés Compuesto'

@@ -1,1 +1,106 @@
-<p>capitalizacion works!</p>
+<hr />
+<div class="card justify-content-center" style="margin: 1%">
+    <div class="p-col-12">
+        <p-card header="Generar de capitalización">
+            <div class="text-align: center;">
+                <form>
+                    <div class="card flex flex-wrap gap-3 p-fluid">
+                        <div class="flex-auto">
+                            <label style="font-weight: bold" for="minmaxfraction">Valor futuro</label>
+                            <p-inputNumber id="valorfuturo" name="valorfuturo" [(ngModel)]="valorfuturo" mode="currency"
+                                currency="COP" [showButtons]="true" inputId="minmaxfraction" [minFractionDigits]="0"
+                                [maxFractionDigits]="3" [min]="0" (focusout)="touchedvalorfuturo = true">
+                            </p-inputNumber>
+                            <small id="valorfuturo"
+                                *ngIf="(valorfuturo === 0 || valorfuturo === null) && touchedvalorfuturo"
+                                class="p-error">El
+                                valor futuro es requerido</small>
+                        </div>
+                        <div class="flex-auto">
+                            <label style="font-weight: bold" for="minmaxfraction">Tasa de interés efectiva</label>
+                            <p-inputNumber id="tasaInteres" mode="decimal" name="tasaInteres" inputId="percent"
+                                prefix="%" [(ngModel)]="tasaInteres" inputId="withoutgrouping" [showButtons]="true"
+                                [min]="0" [max]="100" [maxFractionDigits]="2" (focusout)="touchedtasaInteres = true">
+                            </p-inputNumber>
+                            <small id="tasaInteres" *ngIf="(tasaInteres === null) && touchedtasaInteres"
+                                class="p-error">La tasa de interés es requerida</small>
+                        </div>
+                        <div class="flex-auto">
+                            <label style="font-weight: bold" for="minmaxfraction">Tiempo en meses</label>
+                            <p-inputNumber [(ngModel)]="tiempo" name="tiempo" inputId="withoutgrouping"
+                                [showButtons]="true" [useGrouping]="false" mode="decimal" [min]="1" [max]="1000"
+                                [maxFractionDigits]="2" (focusout)="touchedtiempo = true">
+                            </p-inputNumber>
+                            <small id="tiempo" *ngIf="tiempo === null && touchedtiempo" class="p-error">El tiempo
+                                es requerido</small>
+                        </div>
+                    </div>
+                    <div style="text-align: right; margin-top: 15px">
+                        <p-button styleClass="p-button-outlined p-button-secondary" icon="pi pi-calculator"
+                            [disabled]="valorfuturo === 0 || valorfuturo === null || tasaInteres === null || tiempo === null || tasaInteres>100"
+                            label="Calcular plan de capitalización" (click)="calculate()"></p-button>
+                    </div>
+                </form>
+                <br />
+                <ng-template [ngIf]="activarResultado">
+                    <hr />
+                    <p-table [autoLayout]="false" [scrollable]="true" [value]="datosConvertidos" [paginator]="true" [rows]="10"
+                        [showCurrentPageReport]="true"
+                        currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+                        [rowsPerPageOptions]="[10, 25, 50]"
+                        styleClass="p-datatable-gridlines">
+                        <ng-template pTemplate="caption">La proyección de capitalización es:</ng-template>
+                        <ng-template pTemplate="header">
+                            <tr>
+                                <th scope="col" pSortableColumn="periodo">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Periodo
+                                    </div>
+                                </th>
+
+                                <th scope="col" pSortableColumn="saldo">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Saldo
+                                    </div>
+                                </th>
+
+                                <th scope="col" pSortableColumn="interes">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Interés
+                                    </div>
+                                </th>
+
+                                <th scope="col" pSortableColumn="cuota">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Cuota
+                                    </div>
+                                </th>
+
+                                <th scope="col" pSortableColumn="incremento">
+                                    <div class="p-d-flex p-jc-between p-ai-center">
+                                        Incremento
+                                    </div>
+                                </th>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="body" let-dato>
+                            <tr class="p-selectable-row">
+                                <td>{{ dato.periodo }}</td>
+                                <td>{{ dato.saldo }}</td>
+                                <td>{{ dato.interes }}</td>
+                                <td>{{ dato.cuota }}</td>
+                                <td>{{ dato.incremento }}</td>
+                            </tr>
+                        </ng-template>
+                        <ng-template pTemplate="emptymessage">
+                            <tr>
+                                <td>No se encontraron.</td>
+                            </tr>
+                        </ng-template>
+                    </p-table>
+
+                </ng-template>
+            </div>
+        </p-card>
+    </div>
+</div>
