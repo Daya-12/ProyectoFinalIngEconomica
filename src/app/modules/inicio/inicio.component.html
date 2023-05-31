@@ -46,8 +46,16 @@
     <app-descuento></app-descuento>
 </ng-template>
 
-<ng-template [ngIf]="validateActiveControl('anualidades')">
-    <app-anualidad></app-anualidad>
+<ng-template [ngIf]="validateActiveControl('ordinarias')">
+    <app-anualidad-ordinaria></app-anualidad-ordinaria>
+</ng-template>
+
+<ng-template [ngIf]="validateActiveControl('anticipadas')">
+  <app-anualidad-anticipada></app-anualidad-anticipada>
+</ng-template>
+
+<ng-template [ngIf]="validateActiveControl('perpetuas')">
+  <app-anualidad-perpetua></app-anualidad-perpetua>
 </ng-template>
 
 <ng-template [ngIf]="validateActiveControl('amortizacion')">

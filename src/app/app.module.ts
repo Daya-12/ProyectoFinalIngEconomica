@@ -1,7 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { EquivalenciaTasasComponent } from './modules/equivalencia-tasas/equivalencia-tasas.component';
-import { AnualidadComponent } from './modules/anualidad/anualidad.component';
 import { AmortizacionComponent } from './modules/amortizacion/amortizacion.component';
 import { CapitalizacionComponent } from './modules/capitalizacion/capitalizacion.component';
 import { InteresComponent } from './modules/interes/interes.component';
@@ -25,18 +24,23 @@ import { MenuModule } from 'primeng/menu';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { AnualidadOrdinariaComponent } from './modules/anualidad-ordinaria/anualidad-ordinaria.component';
+import { AnualidadAnticipadaComponent } from './modules/anualidad-anticipada/anualidad-anticipada.component';
+import { AnualidadPerpetuaComponent } from './modules/anualidad-perpetua/anualidad-perpetua.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AmortizacionComponent,
-    AnualidadComponent,
     InteresComponent,
     CapitalizacionComponent,
     ConversionComponent,
     DescuentoComponent,
     EquivalenciaTasasComponent,
-    InicioComponent
+    InicioComponent,
+    AnualidadOrdinariaComponent,
+    AnualidadAnticipadaComponent,
+    AnualidadPerpetuaComponent
   ],
   imports: [
     BrowserModule,
