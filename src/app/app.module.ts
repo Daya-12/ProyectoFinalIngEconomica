@@ -25,6 +25,7 @@ import { MenuModule } from 'primeng/menu';
 import { InputSwitchModule } from 'primeng/inputswitch';
 import { RadioButtonModule } from 'primeng/radiobutton';
 import { MultiSelectModule } from 'primeng/multiselect';
+import { DropdownModule } from 'primeng/dropdown';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import { MultiSelectModule } from 'primeng/multiselect';
     MenuModule,
     InputSwitchModule,
     RadioButtonModule,
-    MultiSelectModule
+    MultiSelectModule,
+    DropdownModule
   ],
   exports: [
     ReactiveFormsModule,

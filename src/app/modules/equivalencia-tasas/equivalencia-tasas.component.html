@@ -1,1 +1,53 @@
-<p>equivalencia-tasas works!</p>
+<hr />
+<div class="card justify-content-center" style="margin: 1%">
+    <div class="p-col-12">
+        <p-card header="Equivalencia de tasas">
+            <div class="text-align: center;">
+                <form>
+                    <div class="card flex flex-wrap gap-3 p-fluid">
+                        <div class="flex-auto">
+                            <label style="font-weight: bold" for="minmaxfraction">Número de periodos conocidos en un
+                                año</label>
+                            <p-inputNumber id="periodosConocidos" [showButtons]="true" name="periodosConocidos"
+                                [(ngModel)]="periodosConocidos" [min]="1" [max]="12" mode="decimal"
+                                inputId="withoutgrouping" [useGrouping]="false"
+                                (focusout)="touchedperiodosConocidos = true"> </p-inputNumber>
+                            <small id="periodosConocidos"
+                                *ngIf="(periodosConocidos === null) && touchedperiodosConocidos" class="p-error">El
+                                número de periodos conocidos es requerido</small>
+                        </div>
+                        <div class="flex-auto">
+                            <label style="font-weight: bold" for="minmaxfraction">Tasa de interés efectiva</label>
+                            <p-inputNumber id="tasaInteres" mode="decimal" name="tasaInteres" inputId="percent"
+                                prefix="%" [(ngModel)]="tasaInteres" inputId="withoutgrouping" [showButtons]="true"
+                                [min]="0" [max]="100" [maxFractionDigits]="2" (focusout)="touchedtasaInteres = true">
+                            </p-inputNumber>
+                            <small id="tasaInteres" *ngIf="(tasaInteres === null) && touchedtasaInteres"
+                                class="p-error">La tasa de interés es requerida</small>
+                        </div>
+                        <div class="flex-auto">
+                            <label style="font-weight: bold" for="minmaxfraction">Periodo a convertir</label>
+                            <p-dropdown [options]="periodos" [(ngModel)]="periodoElegido" optionLabel="name"
+                                id="periodoElegido" name="periodoElegido"></p-dropdown>
+                        </div>
+                    </div>
+
+                    <div style="text-align: right; margin-top: 15px">
+                        <p-button styleClass="p-button-outlined p-button-secondary" icon="pi pi-calculator"
+                            [disabled]="periodosConocidos === 0 || periodosConocidos === null || tasaInteres === null || periodoElegido === null || tasaInteres>100"
+                            label="Convertir tasa" (click)="calculate()"></p-button>
+                    </div>
+
+                </form>
+
+                <br />
+                <ng-template [ngIf]="activarResultado">
+                    <span class="font-medium ml-2"
+                        style="font-family: cursive; font-size:18px;color: rgb(36, 36, 36);font-weight: bold">La tasa efectiva del
+                        {{tasaInteres}}% convertida a periodo {{periodoElegido.name}} es: {{tasaConvertida}} y en porcentaje:
+                        {{porcentaje}}</span>
+                </ng-template>
+            </div>
+        </p-card>
+    </div>
+</div>
