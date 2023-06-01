@@ -10,7 +10,7 @@ export class InicioComponent implements OnInit{
 
   items: MenuItem[] = [];
   itemsMenuControl=[{'name':'interes', 'value':false}, {'name':'conversionTasas', 'value':false}, {'name':'equivalenciaTasas', 'value':false}, {'name':'descuento', 'value':false}, 
-        {'name':'anualidades', 'value':false}, {'name':'amortizacion', 'value':false}, {'name':'capitalizacion', 'value':false}];
+        {'name':'ordinarias', 'value':false}, {'name':'anticipadas', 'value':false} , {'name':'perpetuas', 'value':false} ,{'name':'amortizacion', 'value':false}, {'name':'capitalizacion', 'value':false}];
 
   ngOnInit() {
     this.items = [
@@ -51,9 +51,29 @@ export class InicioComponent implements OnInit{
         {
           label: 'Anualidades',
           icon: 'pi pi-chart-line',
-          command: () => { 
-            this.controlItemsMenu('anualidades'); 
-          }
+          items: [
+            {
+              label: 'Ordinarias',
+              icon: 'pi pi-calendar-plus',
+              command: () => { 
+                this.controlItemsMenu('ordinarias'); 
+              }
+            },
+            {
+              label: 'Anticipadas',
+              icon: 'pi pi-calendar-minus',
+              command: () => { 
+                this.controlItemsMenu('anticipadas'); 
+              }
+            },
+            {
+              label: 'Perpetua',
+              icon: 'pi pi-calendar-times',
+              command: () => { 
+                this.controlItemsMenu('perpetuas'); 
+              }
+            }
+          ]
         },
         {
           label: 'Amortización',

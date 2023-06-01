@@ -1,22 +1,22 @@
 <hr />
 <div class="card justify-content-center" style="margin: 1%">
     <div class="p-col-12">
-        <p-card header="Descuento bancario">
+        <p-card header="Anualidad anticipada">
             <div class="text-align: center;">
                 <form>
                     <div class="flex-auto" *ngIf="!checked">
-                        <label style="font-weight: bold" for="minmaxfraction">Tipo de tiempo</label>
+                        <label style="font-weight: bold" for="minmaxfraction">Tipo de Valor</label>
                         <div class="flex flex-wrap gap-3">
                             <div class="flex align-items-center">
-                                <p-radioButton name="tipoTiempo" value="Dias" [(ngModel)]="tipoTiempo"
-                                    inputId="tipoTiempo1"></p-radioButton>
-                                <label for="Dias" class="ml-2">Dias</label>
+                                <p-radioButton name="tipoValor" value="valor-futuro" [(ngModel)]="tipoValor"
+                                    inputId="tipoValor1"></p-radioButton>
+                                <label for="valor-futuro" class="ml-2">Valor futuro</label>
                             </div>
 
                             <div class="flex align-items-center">
-                                <p-radioButton name="tipoTiempo" value="Meses" [(ngModel)]="tipoTiempo"
-                                    inputId="tipoTiempo2"></p-radioButton>
-                                <label for="Meses" class="ml-2">Meses</label>
+                                <p-radioButton name="tipoValor" value="valor-presente" [(ngModel)]="tipoValor"
+                                    inputId="tipoValor2"></p-radioButton>
+                                <label for="valor-presente" class="ml-2">Valor presente</label>
                             </div>
                         </div>
                     </div>
@@ -32,37 +32,34 @@
                                 valor del monto es requerido</small>
                         </div>
                         <div class="flex-auto">
-                            <label style="font-weight: bold" for="minmaxfraction">Tasa de descuento</label>
+                            <label style="font-weight: bold" for="minmaxfraction">Tasa de interes</label>
                             <p-inputNumber id="tasaInteres" mode="decimal" name="tasaInteres" inputId="percent"
                                 prefix="%" [(ngModel)]="tasaInteres" inputId="withoutgrouping" [showButtons]="true"
                                 [min]="0" [max]="100" [maxFractionDigits]="2" (focusout)="touchedtasaInteres = true">
                             </p-inputNumber>
                             <small id="tasaInteres"
                                 *ngIf="(tasaInteres === 0 || tasaInteres === null) && touchedtasaInteres"
-                                class="p-error">La tasa de descuento es requerida</small>
+                                class="p-error">La tasa de interes es requerida</small>
                         </div>
                         <div class="flex-auto">
-                            <label style="font-weight: bold" for="minmaxfraction">Tiempo transcurrido</label>
-                            <p-inputNumber id="tiempoTranscurrido" name="tiempoTranscurrido" [(ngModel)]="tiempoTranscurrido"
+                            <label style="font-weight: bold" for="minmaxfraction">Periodos</label>
+                            <p-inputNumber id="periodos" name="periodos" [(ngModel)]="periodos"
                                 [showButtons]="true" inputId="minmaxfraction" [minFractionDigits]="0"
-                                [maxFractionDigits]="3" [min]="0" (focusout)="touchedtiempoT = true">
+                                [maxFractionDigits]="3" [min]="0" (focusout)="touchedperiodos = true">
                             </p-inputNumber>
-                            <small id="tiempoTranscurrido" *ngIf="(tiempoTranscurrido === 0 || tiempoTranscurrido === null) && touchedtiempoT" class="p-error">El
+                            <small id="periodos" *ngIf="(periodos === 0 || periodos === null) && touchedperiodos" class="p-error">El
                                 valor del tiempo es requerido</small>
                         </div>
                     </div>
                     <div style="text-align: right; margin-top: 15px">
                         <p-button styleClass="p-button-outlined p-button-secondary" icon="pi pi-calculator"
-                            [disabled]="monto === 0 || monto === null || tasaInteres === 0 || tasaInteres === null || tasaInteres>100 || tiempoTranscurrido === null || tiempoTranscurrido === 0 " 
+                            [disabled]="monto === 0 || monto === null || tasaInteres === 0 || tasaInteres === null || tasaInteres>100 || periodos === null || periodos === 0 " 
                             label="Calcular descuento" (click)="calculate()"></p-button>
                     </div>
                 </form>
                 <ng-template [ngIf]="activarResultado">
-                    <span class="font-medium ml-2" style="font-family: monospace; font-size:19px;color: rgb(36, 36, 36);font-weight: bold">El valor del descuento es:  
-                        {{ valorDescuento }}</span>
-                        <br/>
-                    <span class="font-medium ml-2" style="font-family: monospace; font-size:19px;color: rgb(36, 36, 36);font-weight: bold">El valor total con el descuento es: 
-                        {{ valorTotalDescuento }}</span>
+                    <span class="font-medium ml-2" style="font-family: monospace; font-size:19px;color: rgb(36, 36, 36);font-weight: bold">El valor {{ nombreValor }} es:  
+                        {{ valorFuturo }}</span>
                 </ng-template>
             </div>
         </p-card>
