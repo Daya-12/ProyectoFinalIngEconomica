@@ -1,21 +1,76 @@
 <hr />
 <div class="card justify-content-center" style="margin: 1%">
-    <div class="p-col-12">
-        <p-card [header]="titulo">
+<div class="p-col-12">
+   <p-card [header]="titulo">
+      <br>
+      <div class="text-align: center;">
+         <form>
             <div class="card flex flex-wrap gap-3 p-fluid">
-                <div class="flex-auto">
-                    <p-inputSwitch [(ngModel)]="checkedDeiaj" pTooltip="Convertir de tasa efectiva a tasa nominal"
-                        (onChange)="onSwitchChange('checkedDeiaj')"></p-inputSwitch>
-                </div>
-                <div class="flex-auto">
-                    <p-inputSwitch [(ngModel)]="checkedDejai" pTooltip="Convertir de tasa nominal a tasa efectiva"
-                        (onChange)="onSwitchChange('checkedDejai')"></p-inputSwitch>
-                </div>
-                <div class="flex-auto">
-                    <p-inputSwitch [(ngModel)]="checkedDeiaiant" pTooltip="Convertir de tasa efectiva a tasa efectiva anticipada"
-                        (onChange)="onSwitchChange('checkedDeiaiant')"></p-inputSwitch>
-                </div>
+               <div class="flex-auto" style="text-align: center; flex-basis: 33%;">
+                  <label style="font-weight: bold" for="minmaxfraction" value="">Tasa de interés %</label>
+                  <div class="p-inputgroup">
+                     <input id="tasa" name="tasa" [(ngModel)]="tasa" (focusout)="touchedtasa = true"
+                     class="p-inputtext" type="number" [min]="0" [max]="100">
+                     <span class="p-inputgroup-addon">%</span>
+                  </div>
+                  <small id="tasa" *ngIf="(tasa === 0 || tasa === null || tasa >100) && touchedtasa"
+                     class="p-error">Error en el porcentaje de la tasa</small>
+               </div>
+               <div class="flex-auto" style="text-align: center; flex-basis: 33%;">
+                  <label style="font-weight: bold" for="minmaxfraction">Tipo de Tasa</label>
+                  <div class="card flex justify-content-center">
+                     <p-dropdown [options]="TipoTasa" [(ngModel)]="tasaElegida" optionLabel="name"
+                     id="tasaElegida" name="tasaElegida"></p-dropdown>
+                  </div>
+               </div>
+               <div class="flex-auto" style="text-align: center; flex-basis: 33%;">
+                  <label style="font-weight: bold" for="minmaxfraction">Periodicidad de la tasa:
+                  </label>
+                  <div class="card flex justify-content-center">
+                     <p-dropdown [options]="Periocidad" [(ngModel)]="periodoElegido" optionLabel="name"
+                     id="periodoElegido" name="periodoElegido"></p-dropdown>
+                  </div>
+               </div>
+               <div class="flex-auto" style="text-align: center; flex-basis: 33%;">
+                  <label style="font-weight: bold" for="minmaxfraction">Forma de pago de los
+                  intereses:</label>
+                  <div class="card flex justify-content-center">
+                     <p-dropdown [options]="FormaPago" [(ngModel)]="formaElegida" optionLabel="name"
+                     id="formaElegida" name="formaElegida"></p-dropdown>
+                  </div>
+               </div>
+               <div style="text-align: right; margin-top: 15px">
+                  <p-button styleClass="p-button-outlined p-button-secondary" icon="pi pi-calculator"
+                  [disabled]="tasa === 0 || tasa>100 || tasa==null" label="Calcular"
+                  (click)="f_Calcular()"></p-button>
+               </div>
             </div>
-        </p-card>
-    </div>
+            <br><br>
+            <p-table [value]="miTablaValue" [tableStyle]="{ 'min-width': '50rem', 'display': '' }">
+            <!-- Encabezados de la tabla -->
+            <ng-template pTemplate="header">
+               <tr>
+                  <th>Pagos Anuales</th>
+                  <th>Periodo</th>
+                  <th>Nominal Vencida</th>
+                  <th>Efectiva Vencida</th>
+                  <th>Nominal Anticipada</th>
+                  <th>Efectiva Anticipada</th>
+               </tr>
+            </ng-template>
+            <!-- Filas de la tabla -->
+            <ng-template pTemplate="body" let-fila>
+               <tr>
+                  <td>{{ fila.pagosAnuales }}</td>
+                  <td>{{ fila.periodo }}</td>
+                  <td>{{ fila.nominalVencida }}</td>
+                  <td>{{ fila.efectivaVencida }}</td>
+                  <td>{{ fila.nominalAnticipada }}</td>
+                  <td>{{ fila.efectivaAnticipada }}</td>
+               </tr>
+            </ng-template>
+            </p-table>
+         </form>
+      </div>
+   </p-card>
 </div>
